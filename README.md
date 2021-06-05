@@ -42,4 +42,4 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:12345@localhost:3306/travel'
 
 ## License
 
-[GPLv3 © Hui4401](LICENSE)
+[GPLv3](LICENSE) © Hui4401
