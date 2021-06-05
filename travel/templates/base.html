@@ -1,0 +1,120 @@
+{% from 'bootstrap/nav.html' import render_nav_item %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}旅游预订系统{% endblock title %}</title>
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/blue.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% endblock head %}
+</head>
+
+<body>
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    {{ render_nav_item('index', '主页') }}
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false"> 查询
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('search_flight') }}">航班</a>
+                            <a class="dropdown-item" href="{{ url_for('search_car') }}">出租车</a>
+                            <a class="dropdown-item" href="{{ url_for('search_hotel') }}">宾馆</a>
+                        </div>
+                    </li>
+
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"> 预订
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('res_flight') }}">航班</a>
+                                <a class="dropdown-item" href="{{ url_for('res_car') }}">出租车</a>
+                                <a class="dropdown-item" href="{{ url_for('res_hotel') }}">宾馆</a>
+                            </div>
+                        </li>
+
+                        {% if current_user.is_admin %}
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"> 管理
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url_for('manage_flight') }}">航班</a>
+                                    <a class="dropdown-item" href="{{ url_for('manage_car') }}">出租车</a>
+                                    <a class="dropdown-item" href="{{ url_for('manage_hotel') }}">宾馆</a>
+                                    <a class="dropdown-item" href="{{ url_for('manage_user') }}">客户</a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"> {{ current_user.name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('reservations') }}">我的预定</a>
+                                <a class="dropdown-item" href="{{ url_for('logout') }}">退出登录</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        {{ render_nav_item('login', '登录') }}
+                        {{ render_nav_item('register', '注册') }}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock nav %}
+
+<main class="container">
+    {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }}" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message[1] }}
+        </div>
+    {% endfor %}
+
+    {% block content %}{% endblock content %}
+
+    {% block footer %}
+{#        <footer>#}
+{#            <p class="float-left">#}
+{#                <small> &copy; 2020#}
+{#                    <a href="https://www.cnblogs.com/Hui4401" title="My Site">Assassin</a> -#}
+{#                    <a href="https://github.com/Hui4401" title="My GitHub">GitHub</a>#}
+{#                </small>#}
+{#            </p>#}
+{#        </footer>#}
+    {% endblock footer %}
+</main>
+
+{% block scripts %}
+    {{ bootstrap.load_js() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+    {{ moment.locale('zh-cn') }}
+{% endblock %}
+</body>
+</html>

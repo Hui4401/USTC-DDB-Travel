@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/table.html' import render_table %}}
+
+{% block title %}出租车查询{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>出租车查询</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            {{ render_form(form, extra_classes='col-6') }}
+        </div>
+    </div>
+
+    <div style="margin-top: 50px">
+        {% if cars %}
+            {{ render_table(cars, [('location', '位置'), ('car_type', '出租车类型'), ('total_cars', '出租车总数'),
+                                   ('avail_cars', '可用出租车数'), ('price', '价格')]) }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}更新航班{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>更新航班</h1>
+        </div>
+
+        <div class="row h-100 justify-content-center align-items-center">
+            <form action="" method="post" class="form col-6" role="form">
+                <div class="form-group">
+                    <label class="form-control-label" for="flight_id">航班号</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ flight.id }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="from_addr">出发地</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ flight.from_addr }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="to_addr">目的地</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ flight.to_addr }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="avail_sites">可用座位数</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ flight.avail_sites }}">
+                </div>
+            </form>
+        </div>
+
+        <div class="row h-100 justify-content-center align-items-center">
+                <form action="" method="post" class="form col-6" role="form">
+                    {{ form.csrf_token }}
+                    <div class="form-group required">
+                        <label class="form-control-label" for="total_sites">总座位数</label>
+                        <input class="form-control" id="total_sites" name="total_sites" required="" type="text" value="{{ flight.total_sites }}">
+                    </div>
+                    <div class="form-group required">
+                        <label class="form-control-label" for="price">价格</label>
+                        <input class="form-control" id="price" name="price" required="" type="text" value="{{ flight.price }}">
+                    </div>
+                    <input class="btn btn-primary btn-md" id="submit" name="submit" type="submit" value="更新">
+                </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

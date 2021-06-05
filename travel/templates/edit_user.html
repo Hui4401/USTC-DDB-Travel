@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}更新客户{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>更新客户</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            <form action="" method="post" class="form col-6" role="form">
+                <div class="form-group">
+                    <label class="form-control-label" for="username">用户名</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ user.username }}">
+                </div>
+            </form>
+        </div>
+
+        <div class="row h-100 justify-content-center align-items-center">
+                <form action="" method="post" class="form col-6" role="form">
+                    {{ form.csrf_token }}
+                    <div class="form-group required">
+                        <label class="form-control-label" for="name">客户姓名</label>
+                        <input class="form-control" id="name" name="name" required="" type="text" value="{{ user.username }}">
+                    </div>
+                    <input class="btn btn-primary btn-md" id="submit" name="submit" type="submit" value="更新">
+                </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,2 @@
+FLASK_APP=travel
+FLASK_ENV=development

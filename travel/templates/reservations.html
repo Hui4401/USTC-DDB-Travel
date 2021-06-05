@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/table.html' import render_table %}}
+
+{% block title %}我的预定{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>我的预定</h1>
+        </div>
+    </div>
+
+    <div style="margin-top: 50px">
+        {% if reservations %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>预定时间</th>
+                    <th>预订类型</th>
+                    <th>预定号</th>
+                </tr>
+                </thead>
+                {% for res in reservations %}
+                    <tr>
+                        <td>{{ res.res_time }}</td>
+                        <td>{{ res.res_type }}</td>
+                        <td>{{ res.res_id }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

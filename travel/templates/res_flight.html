@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/table.html' import render_table %}}
+
+{% block title %}航班预订{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>航班预订</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            {{ render_form(form, extra_classes='col-6') }}
+        </div>
+    </div>
+
+    <div style="margin-top: 50px">
+        {% if flights %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>航班号</th>
+                    <th>出发地</th>
+                    <th>目的地</th>
+                    <th>总座位数</th>
+                    <th>可用座位数</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight.id }}</td>
+                        <td>{{ flight.from_addr }}</td>
+                        <td>{{ flight.to_addr }}</td>
+                        <td>{{ flight.total_sites }}</td>
+                        <td>{{ flight.avail_sites }}</td>
+                        <td>{{ flight.price }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm"
+                               href="{{ url_for('res_flight_do')~'?id='~flight.id~'&from_addr='~flight.from_addr~'&to_addr='~flight.to_addr }}">预订</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

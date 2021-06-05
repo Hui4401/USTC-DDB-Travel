@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/table.html' import render_table %}}
+
+{% block title %}出租车预订{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>出租车预订</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            {{ render_form(form, extra_classes='col-6') }}
+        </div>
+    </div>
+
+    <div style="margin-top: 50px">
+        {% if cars %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>位置</th>
+                    <th>出租车类型</th>
+                    <th>出租车总数</th>
+                    <th>可用出租车数</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.location }}</td>
+                        <td>{{ car.car_type }}</td>
+                        <td>{{ car.total_cars }}</td>
+                        <td>{{ car.avail_cars }}</td>
+                        <td>{{ car.price }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm"
+                               href="{{ url_for('res_car_do')~'?location='~car.location~'&car_type='~car.car_type }}">预订</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

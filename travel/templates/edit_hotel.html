@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}更新宾馆{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>更新宾馆</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            <form action="" method="post" class="form col-6" role="form">
+                <div class="form-group">
+                    <label class="form-control-label" for="location">位置</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ hotel.location }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="name">宾馆名称</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ hotel.name }}">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="avail_rooms">可用房间数</label>
+                    <input class="form-control" type="text" disabled="disabled" value="{{ hotel.avail_rooms }}">
+                </div>
+            </form>
+        </div>
+
+        <div class="row h-100 justify-content-center align-items-center">
+                <form action="" method="post" class="form col-6" role="form">
+                    {{ form.csrf_token }}
+                    <div class="form-group required">
+                        <label class="form-control-label" for="total_rooms">房间总数</label>
+                        <input class="form-control" id="total_rooms" name="total_rooms" required="" type="text" value="{{ hotel.total_rooms }}">
+                    </div>
+                    <div class="form-group required">
+                        <label class="form-control-label" for="price">价格</label>
+                        <input class="form-control" id="price" name="price" required="" type="text" value="{{ hotel.price }}">
+                    </div>
+                    <input class="btn btn-primary btn-md" id="submit" name="submit" type="submit" value="更新">
+                </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

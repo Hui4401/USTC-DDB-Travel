@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}主页{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h2>当前状态：
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
+                        管理员登录
+                    {% else %}
+                        普通用户登录
+                    {% endif %}
+                {% else %}
+                    未登录
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
+    <div style="margin-top: 100px">
+        <p><h2>当前用户身份可用功能：</h2></p>
+        <p>
+            <a href="{{ url_for('search_flight') }}">查询航班</a>&emsp;
+            <a href="{{ url_for('search_car') }}">查询出租车</a>&emsp;
+            <a href="{{ url_for('search_hotel') }}">查询宾馆</a>
+        </p>
+        {% if current_user.is_authenticated %}
+            <p>
+                <a href="{{ url_for('res_flight') }}">预订航班</a>&emsp;
+                <a href="{{ url_for('res_car') }}">预订出租车</a>&emsp;
+                <a href="{{ url_for('res_hotel') }}">预订宾馆</a>&emsp;
+                <a href="{{ url_for('reservations') }}">预订记录</a>
+            </p>
+            {% if current_user.is_admin %}
+                <p>
+                    <a href="{{ url_for('manage_flight') }}">管理航班</a>&emsp;
+                    <a href="{{ url_for('manage_car') }}">管理出租车</a>&emsp;
+                    <a href="{{ url_for('manage_hotel') }}">管理宾馆</a>&emsp;
+                    <a href="{{ url_for('manage_user') }}">管理用户</a>
+                </p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

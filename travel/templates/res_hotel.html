@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/table.html' import render_table %}}
+
+{% block title %}宾馆预订{% endblock %}
+
+{% block content %}
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h1>宾馆预订</h1>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            {{ render_form(form, extra_classes='col-6') }}
+        </div>
+    </div>
+
+    <div style="margin-top: 50px">
+        {% if hotels %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>位置</th>
+                    <th>宾馆名称</th>
+                    <th>房间总数</th>
+                    <th>可用房间数</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                {% for hotel in hotels %}
+                    <tr>
+                        <td>{{ hotel.location }}</td>
+                        <td>{{ hotel.name }}</td>
+                        <td>{{ hotel.total_rooms }}</td>
+                        <td>{{ hotel.avail_rooms }}</td>
+                        <td>{{ hotel.price }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm"
+                               href="{{ url_for('res_hotel_do')~'?location='~hotel.location~'&name='~hotel.name }}">预订</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
