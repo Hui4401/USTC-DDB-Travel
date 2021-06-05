@@ -1,5 +1,5 @@
 # USTC-DDB-Travel
-中科大软件学院高级数据库期末作业，Python + Flask + MySQL 实现
+中科大软件学院高级数据库课程期末作业，实现一个简单的旅游预订系统，基于 Python + Flask + MySQL
 
 完成功能：
 
