@@ -8,7 +8,7 @@
 - 登录用户可预定航班，出租车，宾馆，并查看自己的预订记录
 - 管理员可新增或更新航班，出租车，宾馆信息，还可以更新用户资料和查看用户旅行路线
 
-![image-20210605213446682](imgs/image-20210605213446682.png)
+![image-20210605213446682](https://cdn.jsdelivr.net/gh/Hui4401/imgbed/img/2021/06/05/20210605222957.png)
 
 ## Install
 
@@ -42,4 +42,4 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:12345@localhost:3306/travel'
 
 ## License
 
-[GPLv3 © Hui4401](../LICENSE)
+[GPLv3 © Hui4401](LICENSE)
